@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-PT" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design & Desenvolvimento | Boxes de CrossFit & Negócios Locais</title>
+    <meta name="description" content="Criação de websites rápidos e focados em vendas para Boxes de CrossFit, Ginásios, Pastelarias e Restaurantes em Portugal.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            lime: '#a3e635',    /* Destaque energético (Fitness/CrossFit) */
+                            amber: '#f59e0b',   /* Destaque acolhedor (Pastelarias/Restauração) */
+                            dark: '#090d16',
+                            card: '#111827',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-gray-100 font-sans antialiased selection:bg-brand-lime selection:text-black">
+
+    <!-- NAVBAR -->
+    <header class="fixed w-full top-0 z-50 bg-brand-dark/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="font-display font-extrabold text-2xl tracking-tight text-white">
+                DEV<span class="text-brand-lime">.STUDIO</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#especialidades" class="hover:text-brand-lime transition">Especialidades</a>
+                <a href="#portefolio" class="hover:text-brand-lime transition">Portefólio</a>
+                <a href="#precos" class="hover:text-brand-lime transition">Preços</a>
+                <a href="#contacto" class="bg-brand-lime text-gray-950 font-bold px-5 py-2.5 rounded-lg hover:bg-lime-300 transition">
+                    Pedir Orçamento
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 pt-3 pb-6 space-y-3">
+            <a href="#especialidades" class="block py-2 text-gray-300 hover:text-brand-lime">Especialidades</a>
+            <a href="#portefolio" class="block py-2 text-gray-300 hover:text-brand-lime">Portefólio</a>
+            <a href="#precos" class="block py-2 text-gray-300 hover:text-brand-lime">Preços</a>
+            <a href="#contacto" class="block text-center bg-brand-lime text-gray-950 font-bold py-3 rounded-lg">Pedir Orçamento</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gray-800/80 border border-gray-700 text-xs sm:text-sm text-gray-300 mb-6">
+                <span class="w-2 h-2 rounded-full bg-brand-lime animate-pulse"></span>
+                Especialista em Fitness & Comércio Local
+            </div>
+
+            <h1 class="font-display font-black text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white max-w-4xl mx-auto leading-[1.1]">
+                Websites que trazem <span class="text-brand-lime">mais atletas</span> e geram <span class="text-brand-amber">mais encomendas</span>.
+            </h1>
+
+            <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Desenvolvo plataformas rápidas, sem mensalidades abusivas, desenhadas especificamente para <strong class="text-gray-200">Boxes de CrossFit, Ginásios, Pastelarias e Restaurantes</strong> que querem crescer no digital.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#precos" class="w-full sm:w-auto px-8 py-4 bg-brand-lime text-gray-950 font-bold rounded-xl hover:bg-lime-300 transition flex items-center justify-center gap-2">
+                    Ver Planos e Preços
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#portefolio" class="w-full sm:w-auto px-8 py-4 bg-gray-800/80 hover:bg-gray-800 text-white font-semibold rounded-xl border border-gray-700 transition">
+                    Ver Projetos Reais
+                </a>
+            </div>
+
+            <!-- Trust Metrics -->
+            <div class="mt-16 pt-10 border-t border-gray-800/80 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center">
+                <div>
+                    <p class="font-display font-bold text-3xl text-white">100%</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Otimizado para Telemóvel</p>
+                </div>
+                <div>
+                    <p class="font-display font-bold text-3xl text-brand-lime">&lt; 1.5s</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Tempo de Carregamento</p>
+                </div>
+                <div>
+                    <p class="font-display font-bold text-3xl text-white">0€</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Comissões por Venda</p>
+                </div>
+                <div>
+                    <p class="font-display font-bold text-3xl text-brand-amber">Chave na Mão</p>
+                    <p class="text-xs sm:text-sm text-gray-400 mt-1">Domínio, Site e Pagamentos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESPECIALIDADES -->
+    <section id="especialidades" class="py-20 bg-gray-900/50 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-lime font-semibold tracking-wide uppercase text-sm">As Minhas Especialidades</h2>
+                <p class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                    Conheço o teu setor por dentro
+                </p>
+                <p class="text-gray-400 mt-4">
+                    Não faço sites genéricos. Construo ferramentas pensadas para resolver os problemas reais do teu dia a dia.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Nicho 1: Fitness & CrossFit -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 hover:border-brand-lime/50 transition relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-lime/10 border border-brand-lime/30 flex items-center justify-center text-brand-lime mb-6">
+                        <i data-lucide="dumbbell" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-white mb-3">
+                        Boxes de CrossFit, Ginásios & Estúdios
+                    </h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Como praticante da modalidade, sei exatamente o que um potencial atleta procura antes de marcar uma aula experimental (Drop-in ou Trial).
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-lime shrink-0 mt-0.5"></i>
+                            <span><strong>Captação de Aulas Experimentais:</strong> Formulários diretos e integração com WhatsApp para converter visitantes em alunos.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-lime shrink-0 mt-0.5"></i>
+                            <span><strong>Horários, Modalidades e Planos Claros:</strong> Grelhas fáceis de consultar no telemóvel (Open Box, WOD, Hyrox, Halterofilismo).</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-lime shrink-0 mt-0.5"></i>
+                            <span><strong>Destaque da Comunidade e Coaches:</strong> Secções visuais de alto impacto que transmitem a energia real do teu espaço.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Nicho 2: Pastelarias & Negócios Locais -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 hover:border-brand-amber/50 transition relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-amber/10 border border-brand-amber/30 flex items-center justify-center text-brand-amber mb-6">
+                        <i data-lucide="croissant" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="font-display font-bold text-2xl text-white mb-3">
+                        Pastelarias, Padarias & Restauração Local
+                    </h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Transforma os clientes do bairro em compradores recorrentes, permitindo que vejam a tua montra e façam encomendas sem depender de chamadas ou comissões de apps de entrega.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-amber shrink-0 mt-0.5"></i>
+                            <span><strong>Sistema de Encomendas e Pagamentos Online:</strong> Recebe encomendas de bolos, pães e menus já pagas de forma segura.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-amber shrink-0 mt-0.5"></i>
+                            <span><strong>Menus Digitais e Catálogo Visual:</strong> Fotografias apelativas dos teus produtos sempre acessíveis por QR Code ou Google.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-amber shrink-0 mt-0.5"></i>
+                            <span><strong>Destaque no Google Maps (SEO Local):</strong> Quem pesquisar na tua zona encontra a tua casa primeiro que a concorrência.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTEFÓLIO (OS 2 PROJETOS) -->
+    <section id="portefolio" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14">
+                <div>
+                    <h2 class="text-brand-lime font-semibold tracking-wide uppercase text-sm">Trabalho Comprovado</h2>
+                    <p class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                        Projetos em Destaque
+                    </p>
+                </div>
+                <p class="text-gray-400 mt-4 md:mt-0 max-w-md text-sm">
+                    Cada projeto é construído à medida, focado na velocidade, facilidade de uso no telemóvel e conversão direta em vendas.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Projeto 1: Box de CrossFit -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl overflow-hidden flex flex-col justify-between group hover:border-gray-700 transition">
+                    <div>
+                        <div class="h-64 bg-gradient-to-br from-gray-800 to-gray-950 relative flex items-center justify-center p-6 border-b border-gray-800">
+                            <!-- Substituir src pela captura de ecrã real do teu projeto -->
+                            <div class="text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-lime text-gray-950 uppercase">Fitness & CrossFit</span>
+                                <h4 class="font-display font-black text-2xl text-white mt-4">Plataforma Oficial — Box & Arena Fitness</h4>
+                                <p class="text-xs text-gray-400 mt-2">Substitui este bloco por uma imagem real do site</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-display font-bold text-2xl text-white mb-2">Website para Box de CrossFit & Treino Híbrido</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                Desenvolvimento de website moderno de alta conversão para apresentação das instalações, horários de treino, planos de adesão e marcação rápida de aula experimental.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Design Mobile-First</span>
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Captação de Atletas</span>
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Horários e Planos</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="#" target="_blank" class="inline-flex items-center gap-2 text-brand-lime font-semibold hover:underline text-sm">
+                            Visitar Website ao Vivo <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Projeto 2: Pastelaria -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl overflow-hidden flex flex-col justify-between group hover:border-gray-700 transition">
+                    <div>
+                        <div class="h-64 bg-gradient-to-br from-amber-950/40 to-gray-950 relative flex items-center justify-center p-6 border-b border-gray-800">
+                            <!-- Substituir src pela captura de ecrã real do teu projeto -->
+                            <div class="text-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-amber text-gray-950 uppercase">Comércio Local & E-Commerce</span>
+                                <h4 class="font-display font-black text-2xl text-white mt-4">Pastelaria Tradicional — Encomendas Online</h4>
+                                <p class="text-xs text-gray-400 mt-2">Substitui este bloco por uma imagem real do site</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="font-display font-bold text-2xl text-white mb-2">Pastelaria com Pagamentos e Encomendas Online</h3>
+                            <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                                Criação de plataforma digital completa com catálogo de produtos de pastelaria, sistema de encomendas personalizadas e integração direta de pagamentos seguros com domínio próprio.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Pagamentos Stripe</span>
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Catálogo Online</span>
+                                <span class="text-xs px-3 py-1 rounded-md bg-gray-800 text-gray-300">Domínio Personalizado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-8 pb-8">
+                        <a href="https://pastelariatorrita.com" target="_blank" class="inline-flex items-center gap-2 text-brand-amber font-semibold hover:underline text-sm">
+                            Visitar Website ao Vivo <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇOS (3 PATAMARES) -->
+    <section id="precos" class="py-20 bg-gray-900/50 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-brand-lime font-semibold tracking-wide uppercase text-sm">Transparência Total</h2>
+                <p class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-2">
+                    Investimento Único. Sem Surpresas.
+                </p>
+                <p class="text-gray-400 mt-4">
+                    Escolhe a solução ideal para a fase atual do teu negócio. Todos os pacotes incluem design adaptado a telemóveis e configuração técnica completa.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- 1. SITE BASE -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Essencial</span>
+                        <h3 class="font-display font-bold text-2xl text-white mt-1">Site Base</h3>
+                        <p class="text-gray-400 text-sm mt-2">
+                            Ideal para marcar presença profissional rápida, mostrar horários, preçário ou menu digital.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-gray-800">
+                            <span class="text-sm text-gray-400">A partir de</span>
+                            <div class="flex items-baseline gap-1 mt-1">
+                                <span class="font-display font-black text-4xl text-white">250€</span>
+                                <span class="text-xs text-gray-400">/ pagamento único</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Página única completa (Landing Page até 4 secções)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Menu digital ou grelha de horários/modalidades</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Botão direto para WhatsApp e redes sociais</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Mapa de localização Google Maps integrado</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Entrega rápida (5 a 7 dias úteis)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" onclick="selecionarPlano('Site Base (250€)')" class="w-full py-3.5 px-6 rounded-xl border border-gray-700 hover:border-brand-lime text-white font-semibold text-center transition">
+                        Escolher Site Base
+                    </a>
+                </div>
+
+                <!-- 2. SITE INTERMÉDIO (DESTAQUE) -->
+                <div class="bg-gray-900 border-2 border-brand-lime rounded-2xl p-8 flex flex-col justify-between relative shadow-2xl shadow-brand-lime/5 lg:-translate-y-3">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-lime text-gray-950 text-xs font-extrabold uppercase px-4 py-1 rounded-full">
+                        Mais Procurado
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-lime">Crescimento & Captação</span>
+                        <h3 class="font-display font-bold text-2xl text-white mt-1">Site Intermédio</h3>
+                        <p class="text-gray-400 text-sm mt-2">
+                            Perfeito para Boxes, Ginásios e Restaurantes que querem captar novos clientes todos os meses pelo Google.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-gray-800">
+                            <span class="text-sm text-gray-400">A partir de</span>
+                            <div class="flex items-baseline gap-1 mt-1">
+                                <span class="font-display font-black text-4xl text-white">450€</span>
+                                <span class="text-xs text-gray-400">/ pagamento único</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-gray-200 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span><strong>Tudo do plano Base</strong> + Estrutura multipágina ou até 8 secções</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Formulários de inscrição em Aula Experimental / Reservas</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Galeria de fotos/vídeos de alta velocidade</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Otimização SEO Local (para aparecer nas pesquisas da tua zona)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-lime shrink-0"></i>
+                                <span>Configuração de domínio próprio (.pt ou .com)</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" onclick="selecionarPlano('Site Intermédio (450€)')" class="w-full py-3.5 px-6 rounded-xl bg-brand-lime hover:bg-lime-300 text-gray-950 font-bold text-center transition">
+                        Escolher Site Intermédio
+                    </a>
+                </div>
+
+                <!-- 3. SITE COMPLEXO -->
+                <div class="bg-brand-card border border-gray-800 rounded-2xl p-8 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-amber">E-Commerce & Automação</span>
+                        <h3 class="font-display font-bold text-2xl text-white mt-1">Site Complexo</h3>
+                        <p class="text-gray-400 text-sm mt-2">
+                            Para negócios que querem vender produtos, aceitar encomendas personalizadas e receber pagamentos online.
+                        </p>
+                        <div class="my-6 pt-6 border-t border-gray-800">
+                            <span class="text-sm text-gray-400">A partir de</span>
+                            <div class="flex items-baseline gap-1 mt-1">
+                                <span class="font-display font-black text-4xl text-white">750€</span>
+                                <span class="text-xs text-gray-400">/ pagamento único</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3.5 text-sm text-gray-300 mb-8">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-amber shrink-0"></i>
+                                <span><strong>Tudo do plano Intermédio</strong> + Sistema de Vendas Online</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-amber shrink-0"></i>
+                                <span>Carrinho de compras e checkout de encomendas (Take-away / Entrega)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-amber shrink-0"></i>
+                                <span>Pagamentos Online Integrados (Cartão, Apple/Google Pay via Stripe)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-amber shrink-0"></i>
+                                <span>Notificações automáticas de novas encomendas por e-mail</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-5 h-5 text-brand-amber shrink-0"></i>
+                                <span>Apoio técnico prioritário no lançamento</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <a href="#contacto" onclick="selecionarPlano('Site Complexo - Vendas Online (750€)')" class="w-full py-3.5 px-6 rounded-xl border border-gray-700 hover:border-brand-amber text-white font-semibold text-center transition">
+                        Escolher Site Complexo
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECÇÃO DE CONTACTO -->
+    <section id="contacto" class="py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 sm:p-12">
+                <div class="text-center max-w-2xl mx-auto mb-10">
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">
+                        Vamos pôr o teu negócio a crescer?
+                    </h2>
+                    <p class="text-gray-400 mt-3">
+                        Preenche o formulário abaixo ou envia mensagem direta pelo WhatsApp. Respondo em menos de 24 horas com uma proposta ajustada ao teu espaço.
+                    </p>
+                </div>
+
+                <!-- Substitui TEU_EMAIL_AQUI pelo teu e-mail real para o FormSubmit funcionar -->
+                <form action="https://formsubmit.co/TEU_EMAIL_AQUI" method="POST" class="space-y-6">
+                    <input type="hidden" name="_subject" value="Novo Pedido de Orçamento - Portefólio Web">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">O teu Nome *</label>
+                            <input type="text" name="nome" required placeholder="Ex: João Silva" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-brand-lime">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Nome da Box / Negócio *</label>
+                            <input type="text" name="negocio" required placeholder="Ex: CrossFit Sintra / Pastelaria Central" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-brand-lime">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Telemóvel / WhatsApp *</label>
+                            <input type="tel" name="telefone" required placeholder="Ex: 912 345 678" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-brand-lime">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-2">Plano Pretendido</label>
+                            <select id="select-plano" name="plano" 
+                                class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-brand-lime">
+                                <option value="Ainda não tenho a certeza">Ainda não tenho a certeza</option>
+                                <option value="Site Base (250€)">Site Base (a partir de 250€)</option>
+                                <option value="Site Intermédio (450€)">Site Intermédio (a partir de 450€)</option>
+                                <option value="Site Complexo - Vendas Online (750€)">Site Complexo - Vendas Online (a partir de 750€)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-2">O que precisas no teu novo site?</label>
+                        <textarea name="mensagem" rows="4" placeholder="Conta-me brevemente o teu objetivo (ex: captar mais alunos, receber encomendas online, renovar imagem...)" 
+                            class="w-full px-4 py-3 rounded-xl bg-gray-900 border border-gray-700 text-white focus:outline-none focus:border-brand-lime"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-brand-lime hover:bg-lime-300 text-gray-950 font-bold rounded-xl transition text-lg">
+                        Enviar Pedido de Proposta Gratuita
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-gray-800 text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© 2026 Desenvolvimento Web Freelance — Portugal. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE WHATSAPP (Substitui 351910000000 pelo teu número) -->
+    <a href="https://wa.me/351910000000?text=Ol%C3%A1!%20Vi%20o%20teu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20a%20cria%C3%A7%C3%A3o%20de%20um%20website." 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-400 text-gray-950 font-bold px-5 py-3.5 rounded-full shadow-lg flex items-center gap-2 transition transform hover:scale-105">
+        <i data-lucide="message-circle" class="w-5 h-5"></i>
+        <span class="hidden sm:inline">Falar no WhatsApp</span>
+    </a>
+
+    <script>
+        // Inicializar ícones
+        lucide.createIcons();
+
+        // Menu Mobile
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Preencher automaticamente o plano escolhido no formulário
+        function selecionarPlano(plano) {
+            const select = document.getElementById('select-plano');
+            if (select) {
+                select.value = plano;
+            }
+        }
+    </script>
+</body>
+</html>
