@@ -657,8 +657,8 @@ section.alt {
 
 .projects {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
     margin-top: 34px
 }
 
@@ -666,16 +666,33 @@ section.alt {
     background: var(--paper);
     border: 1px solid var(--line);
     padding: 6px;
-    transition: .3s
+    transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+    display: flex;
+    flex-direction: column
 }
 
-.proj:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 30px rgba(26, 34, 52, .12)
+@media(hover: hover) {
+    .proj:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(26, 34, 52, .12);
+        border-color: rgba(26, 34, 52, .25)
+    }
+
+    .shot:hover .shot-img {
+        transform: scale(1.05)
+    }
+
+    .shot:hover .bar {
+        background: var(--navy)
+    }
+}
+
+.proj:active {
+    transform: scale(0.99)
 }
 
 .shot {
-    height: 200px;
+    height: 190px;
     position: relative;
     overflow: hidden;
     display: block;
@@ -691,8 +708,8 @@ section.alt {
     transition: transform .4s ease
 }
 
-.shot:hover .shot-img {
-    transform: scale(1.05)
+.shot-img.center-pos {
+    object-position: center center
 }
 
 .shot .bar {
@@ -712,30 +729,30 @@ section.alt {
     z-index: 2
 }
 
-.shot:hover .bar {
-    background: var(--navy)
-}
-
 .pinfo {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    padding: 16px 12px 14px
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px 12px 14px;
+    flex: 1
 }
 
 .pinfo .mono {
     font-size: 9px;
-    color: var(--muted)
+    color: var(--muted);
+    line-height: 1.4
 }
 
 .pinfo h3 {
     font-family: var(--head);
     font-size: 15px;
-    margin-top: 6px
+    margin-top: 4px;
+    line-height: 1.25
 }
 
 .pinfo h3 a {
-    transition: color .2s
+    transition: color .2s;
+    display: inline-block
 }
 
 .pinfo h3 a:hover {
@@ -743,9 +760,10 @@ section.alt {
 }
 
 .pinfo p {
-    font-size: 10.5px;
+    font-size: 11px;
     color: var(--muted);
-    line-height: 1.5
+    line-height: 1.5;
+    margin-top: auto
 }
 
 .note {
@@ -1407,6 +1425,10 @@ footer a:hover {
         grid-template-columns: 1fr;
     }
 
+    .shot {
+        height: 220px;
+    }
+
     nav a:not(.btn-nav) {
         display: none;
     }
@@ -1562,13 +1584,18 @@ footer a:hover {
     }
 
     /* Projects / Work */
+    .projects {
+        gap: 16px;
+        margin-top: 24px;
+    }
+
     .pinfo {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        padding: 12px 10px 14px;
+        gap: 6px;
     }
 
     .shot {
-        height: 180px;
+        height: clamp(165px, 48vw, 190px);
     }
 
     /* Pricing */
@@ -1628,7 +1655,7 @@ footer a:hover {
 
     /* Footer */
     footer {
-        padding: 24px 0 92px; /* Espaço para o botão flutuante do WhatsApp */
+        padding: 24px 0 calc(92px + env(safe-area-inset-bottom, 0px)); /* Espaço para o botão flutuante do WhatsApp */
     }
 
     .footer-row {
@@ -1645,8 +1672,8 @@ footer a:hover {
 
     /* WhatsApp Button Mobile */
     .whatsapp-float {
-        bottom: 18px;
-        right: 18px;
+        bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+        right: calc(18px + env(safe-area-inset-right, 0px));
         padding: 12px;
         border-radius: 50%;
         box-shadow: 3px 3px 0 var(--navy);
@@ -1663,6 +1690,22 @@ footer a:hover {
 
 /* Small Smartphone Displays (<= 480px) */
 @media(max-width:480px) {
+    .shot {
+        height: clamp(155px, 48vw, 175px);
+    }
+
+    .shot .bar {
+        font-size: 9.5px;
+        padding: 8px 10px;
+    }
+
+    .pinfo h3 {
+        font-size: 14.5px;
+    }
+
+    .pinfo p {
+        font-size: 10.5px;
+    }
     header .wrap {
         height: 58px;
     }
@@ -1721,5 +1764,9 @@ footer a:hover {
 
     .tag {
         font-size: 9px;
+    }
+
+    .shot {
+        height: 145px;
     }
 }
