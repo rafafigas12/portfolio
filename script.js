@@ -1,6 +1,8 @@
 const $ = id => document.getElementById(id);
-const FORMSUBMIT_ENDPOINT = 'rafafigas@gmail.com';
+// Cole aqui a sua Access Key gerada em https://web3forms.com
+const WEB3FORMS_ACCESS_KEY = '35f88c13-7fc6-4d8f-a2d9-42ffc231459a';
 const CONTACT_EMAIL = 'rafafigas@gmail.com';
+
 function build() {
     return `Pedido de orçamento
 Negócio: ${$('nome').value || 'Ainda não indicado'}
@@ -41,42 +43,40 @@ form.addEventListener('submit', async e => {
         return;
     }
 
+    const key = (WEB3FORMS_ACCESS_KEY && WEB3FORMS_ACCESS_KEY !== 'YOUR_ACCESS_KEY_HERE')
+        ? WEB3FORMS_ACCESS_KEY
+        : ($('access_key') && $('access_key').value !== 'YOUR_ACCESS_KEY_HERE' ? $('access_key').value : '');
+
+    if (!key) {
+        setStatus(`⚙️ <b>Falta a Access Key do Web3Forms:</b> Obtenha a sua chave gratuita em <a href="https://web3forms.com" target="_blank" rel="noopener" style="color:var(--lime);text-decoration:underline">web3forms.com</a> e cole-a em <code>script.js</code> na variável <code>WEB3FORMS_ACCESS_KEY</code>. Entretanto, pode <a href="mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Pedido de orçamento')}&body=${encodeURIComponent(build())}" style="color:var(--lime);text-decoration:underline">clicar aqui para enviar diretamente por email</a>.`, 'error');
+        return;
+    }
+
     submitBtn.disabled = true;
     submitText.textContent = 'A enviar pedido...';
     submitIcon.textContent = '⏳';
 
     try {
-        const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_ENDPOINT}`, {
+        const response = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                Nome: nome || 'Não indicado',
-                Email: email,
-                Pacote: pacote,
-                Mensagem: msg || 'Ainda a definir',
-                _subject: `Novo pedido de orçamento: ${nome || 'Website'} (${pacote})`,
-                _replyto: email,
-                _template: 'table',
-                _captcha: 'false'
+                access_key: key,
+                nome: nome || 'Não indicado',
+                email: email,
+                pacote: pacote,
+                mensagem: msg || 'Ainda a definir',
+                subject: `Novo pedido de orçamento: ${nome || 'Website'} (${pacote})`,
+                from_name: 'Figas Studio Portfólio'
             })
         });
 
-        let data = null;
-        const contentType = response.headers.get('content-type') || '';
-        if (contentType.includes('application/json')) {
-            try {
-                data = await response.json();
-            } catch (_) {}
-        }
+        const data = await response.json();
 
-        if (response.status === 521 || (!response.ok && !data)) {
-            throw new Error('O serviço FormSubmit está temporariamente indisponível (servidor em manutenção).');
-        }
-
-        if (data && (response.ok && (data.success === 'true' || data.success === true))) {
+        if (response.ok && (data.success === true || data.success === 'true')) {
             setStatus(`✓ <b>Pedido enviado com sucesso!</b> Recebi a sua mensagem em ${CONTACT_EMAIL} e entrarei em contacto brevemente.`, 'success');
             form.reset();
             submitText.textContent = 'Pedido enviado!';
@@ -86,26 +86,12 @@ form.addEventListener('submit', async e => {
                 submitIcon.textContent = '✉';
                 submitBtn.disabled = false;
             }, 4000);
-            return;
+        } else {
+            throw new Error(data.message || 'Falha no envio');
         }
-
-        if (data && data.message && data.message.toLowerCase().includes('activation')) {
-            setStatus(`✉️ <b>Ativação necessária:</b> O FormSubmit enviou um email para <b>${CONTACT_EMAIL}</b> com o assunto <i>"Action Required: Confirm your form"</i>. Por favor abra esse email e clique no botão <b>"Activate Form"</b> para ativar o recebimento no domínio figasstudio.com.`, 'error');
-            submitText.textContent = 'Aguardando ativação';
-            submitIcon.textContent = '✉';
-            submitBtn.disabled = false;
-            return;
-        }
-
-        throw new Error((data && data.message) || `Falha no envio (HTTP ${response.status})`);
     } catch (err) {
         console.error(err);
-        const msg = err.message || '';
-        if (msg.toLowerCase().includes('activation')) {
-            setStatus(`✉️ <b>Ativação necessária:</b> O FormSubmit enviou um email para <b>${CONTACT_EMAIL}</b> com o botão <i>"Activate Form"</i>. Clique nele uma única vez para desbloquear os envios.`, 'error');
-        } else {
-            setStatus(`Não foi possível enviar automaticamente (${msg || 'erro de rede'}). Pode <a href="mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Pedido de orçamento')}&body=${encodeURIComponent(build())}" style="color:var(--lime);text-decoration:underline">clicar aqui para enviar pelo seu email</a> ou escrever para <b>${CONTACT_EMAIL}</b>.`, 'error');
-        }
+        setStatus(`Não foi possível enviar automaticamente (${err.message || 'erro de rede'}). Pode <a href="mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Pedido de orçamento')}&body=${encodeURIComponent(build())}" style="color:var(--lime);text-decoration:underline">clicar aqui para enviar pelo seu email</a> ou escrever para <b>${CONTACT_EMAIL}</b>.`, 'error');
         submitText.textContent = 'Tentar novamente';
         submitIcon.textContent = '✉';
         submitBtn.disabled = false;
