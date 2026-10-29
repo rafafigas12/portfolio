@@ -1,5 +1,5 @@
 const $ = id => document.getElementById(id);
-const FORMSUBMIT_TOKEN = '502046567d93ac84271c934aaa588892';
+const FORMSUBMIT_ENDPOINT = 'rafafigas@gmail.com';
 const CONTACT_EMAIL = 'rafafigas@gmail.com';
 function build() {
     return `Pedido de orçamento
@@ -46,7 +46,7 @@ form.addEventListener('submit', async e => {
     submitIcon.textContent = '⏳';
 
     try {
-        const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_TOKEN}`, {
+        const response = await fetch(`https://formsubmit.co/ajax/${FORMSUBMIT_ENDPOINT}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,9 +64,19 @@ form.addEventListener('submit', async e => {
             })
         });
 
-        const data = await response.json();
+        let data = null;
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+            try {
+                data = await response.json();
+            } catch (_) {}
+        }
 
-        if (response.ok && (data.success === 'true' || data.success === true)) {
+        if (response.status === 521 || (!response.ok && !data)) {
+            throw new Error('O serviço FormSubmit está temporariamente indisponível (servidor em manutenção).');
+        }
+
+        if (data && (response.ok && (data.success === 'true' || data.success === true))) {
             setStatus(`✓ <b>Pedido enviado com sucesso!</b> Recebi a sua mensagem em ${CONTACT_EMAIL} e entrarei em contacto brevemente.`, 'success');
             form.reset();
             submitText.textContent = 'Pedido enviado!';
@@ -76,14 +86,18 @@ form.addEventListener('submit', async e => {
                 submitIcon.textContent = '✉';
                 submitBtn.disabled = false;
             }, 4000);
-        } else if (data.message && data.message.toLowerCase().includes('activation')) {
-            setStatus(`✉️ <b>Ativação necessária:</b> O FormSubmit enviou um email para <b>${CONTACT_EMAIL}</b> com o assunto <i>"Action Required: Confirm your form"</i>. Por favor abra esse email e clique no botão <b>"Activate Form"</b> para ativar o recebimento.`, 'error');
+            return;
+        }
+
+        if (data && data.message && data.message.toLowerCase().includes('activation')) {
+            setStatus(`✉️ <b>Ativação necessária:</b> O FormSubmit enviou um email para <b>${CONTACT_EMAIL}</b> com o assunto <i>"Action Required: Confirm your form"</i>. Por favor abra esse email e clique no botão <b>"Activate Form"</b> para ativar o recebimento no domínio figasstudio.com.`, 'error');
             submitText.textContent = 'Aguardando ativação';
             submitIcon.textContent = '✉';
             submitBtn.disabled = false;
-        } else {
-            throw new Error(data.message || 'Falha no envio');
+            return;
         }
+
+        throw new Error((data && data.message) || `Falha no envio (HTTP ${response.status})`);
     } catch (err) {
         console.error(err);
         const msg = err.message || '';
